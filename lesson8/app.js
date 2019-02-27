@@ -41,6 +41,32 @@ function create(){
 	lifetext = game.add.text(120,5, life,style);
 	lifelabel.setShadow(3,3,'rgba(0,0,0,0.5)',2);
 	lifetext.setShadow(3,3,'rgba(0,0,0,0.5)',2);
+
+	player = game.add.sprite(32, 400, 'dude');
+		player.animations.add('left', [0,1,2,3], 10, true);
+		player.animations.add('right', [5,6,7,8], 10, true);
+		game.physic.arcade.enable(player);
+		player.body.bounce.y = 0.2;
+		player.body.gravity.y = 300;
+		player.body.collideWorldBounds = true;
+
+	enemy1 = game.add.sprite(760, 20, 'baddie');
+		enemy1.animations.add('left', [0,1], 10, true);
+		enemy1.animations.add('right', [2,3], 10, true);
+		game.physic.arcade.enable(enemy1);
+		enemy1.body.bounce.y = 0.2;
+		enemy1.body.gravity.y = 300;
+		enemy1.body.collideWorldBounds = true;
+
+	stars = game.add.physicsGroup();
+	stars.enableBody = true;
+
+	for (var i = 0; i < 12; i++){
+		var star = stars.create(i*70, 0, 'star');
+		star.body.gravity.y =200;
+		star.body.bounce.y = 0.7 + Math.random() * 0.2;
+	}
+
 }
 
 function update(){
